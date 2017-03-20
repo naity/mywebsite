@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load research_extras %}
+{% load staticfiles %}
+
+{% block head_block %}
+  <link href="{% static 'research/css/research.css' %}" rel="stylesheet">
+  <script src="{% static 'research/js/abstract.js' %}"></script> 
+  <script src="{% static 'research/js/download_ajax.js' %}"></script> 
+{% endblock %}
+
+{% block title %}Research{% endblock %}
+
+{% block nav_block %}
+  <ul class="nav navbar-nav">
+    <li><a href="{% url 'home:index' %}">Home</a></li>
+    <li class="active"><a href="{% url 'research:index' %}">Research</a></li>
+    <li><a href="{% url 'photography:index' %}">Photography</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Coding <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a href="https://github.com/naity" target="_blank">My Github</a></li>
+        <li role="separator" class="divider"></li>
+        <li class="dropdown-header">Websites</li>
+        <li><a href="http://sleepy-reef-3314.herokuapp.com/" target="_blank">Best of Zhihu</a></li>
+      </ul>
+    </li>
+    <li><a href="/media/cv/pdf/Yuan_Tian_Resume.pdf" target="_blank">CV</a></li>
+  </ul>
+{% endblock %}
+
+{% block body_block %}
+  <div class="container">
+    <div class="page-header">
+      <h1>Combat Infectious Diseases</h1>
+    </div>
+
+    <p class="lead">Protective immunity against infections cancers relies on the ability of T cells to generate both effector cells that cooperate to eliminate antigens as well as memory cells that can survive for long periods with enhanced abilities to control recurring antigens. Thus, it is crucial to gain a better understanding of the differentiation and function of T cells. My graduate work was focused on the functions of two cytokines, interleukin (IL)-21 and IL-10, in the differentiation of various CD4 and CD8 T cell populations. As a postdoctoral fellow, I am applying my previous knowledge and research skills, in conjunction with my more recent training in mass cytometry and bioinformatics, to define immune signatures (IMS) of protective CD4 and CD8 T cell responses against dengue virus (DENV) infection. These studies will generate new insights into the development of immunotherapies and vaccines that fight DENV as well as other emerging pathogens.</p>
+
+    {% for publication in publications %}
+      <div class="well">
+        <div class="row">
+          <div class="col-xs-12 col-md-4 publication-fig">
+            <a href="{{ publication.pdf.url }}" target="_blank" class="downloads" data-pubid="{{publication.id}}">
+                <img class="img-responsive" src="{{ publication.figure.url }}" alt="Figure">
+            </a>
+          </div>
+          <div class="col-xs-12 col-md-8">
+            <h4 class="">{{ publication.title }}</h4>
+            <h5>
+              {% get_author_list publication as author_list %}
+              {% for author in author_list %}
+                {% if author|is_me %}
+                  {% if author|is_last:author_list %}
+                    <u><strong>and {{ author }}</strong></u>
+                  {% else %}
+                    <u><strong>{{ author }},</strong></u>
+                  {% endif %}
+                {% else %}
+                  {% if author|is_last:author_list %}
+                    and {{ author }}
+                  {% else %}
+                    {{ author }},
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </h5>
+            <div>
+              <p class="abstract">{{ publication.abstract }}</p>
+              <a class="show-more-or-less current-less">...Show more>></a>
+            </div>
+            <div>
+              <span class="pull-right">
+                <a class="btn btn-primary downloads" href="{{ publication.pdf.url }}" target="_blank" role="button" data-pubid="{{publication.id}}">Read Full Text</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

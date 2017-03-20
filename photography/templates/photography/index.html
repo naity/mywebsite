@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load photography_extras %}
+{% load staticfiles %}
+
+{% block head_block %}
+  <link href="{% static 'photography/Gallery-2.21.3/css/blueimp-gallery.min.css' %}" rel="stylesheet">
+  <link href="{% static 'photography/Bootstrap-Image-Gallery-3.4.2/css/bootstrap-image-gallery.css' %}" rel="stylesheet">
+  <link href="{% static 'photography/Bootstrap-Image-Gallery-3.4.2/css/demo.css' %}" rel="stylesheet">
+  <link href="{% static 'photography/css/photography.css' %}" rel="stylesheet">
+  <script src="{% static 'photography/Gallery-2.21.3/js/jquery.blueimp-gallery.min.js' %}"></script>
+  <script src="{% static 'photography/Bootstrap-Image-Gallery-3.4.2/js/bootstrap-image-gallery.js' %}"></script>
+  <script src="{% static 'photography/Bootstrap-Image-Gallery-3.4.2/js/demo.js' %}"></script>
+  <script src="{% static 'photography/js/like_photo_ajax.js' %}"></script>
+  <script src="{% static 'photography/js/image_heights.js' %}"></script>
+{% endblock %}
+
+{% block title %}Photography{% endblock %}
+
+{% block nav_block %}
+  <ul class="nav navbar-nav">
+    <li><a href="{% url 'home:index' %}">Home</a></li>
+    <li><a href="{% url 'research:index' %}">Research</a></li>
+    <li class="active"><a href="{% url 'photography:index' %}">Photography</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Coding <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a href="https://github.com/naity" target="_blank">My Github</a></li>
+        <li role="separator" class="divider"></li>
+        <li class="dropdown-header">Websites</li>
+        <li><a href="http://sleepy-reef-3314.herokuapp.com/" target="_blank">Best of Zhihu</a></li>
+      </ul>
+    </li>
+    <li><a href="/media/cv/pdf/Yuan_Tian_Resume.pdf" target="_blank">CV</a></li>
+  </ul>
+{% endblock %}
+
+{% block body_block %}
+  <div class="container">
+    <div class="page-header">
+      <h1>Capture Memorable Moments</h1>
+    </div>
+    <blockquote>
+      <p>In short, beauty is everywhere. It is not she that is lacking to our eye, but our eyes which fail to perceive her.</p>
+      <footer><cite title="Source Title">Auguste Rodin</cite>, French Sculptor</footer>
+    </blockquote>
+
+    <!-- The container for the list of photos -->
+    <div id="links">
+      <div class="row">
+        {% for photo in photos %}
+          <div class="col-md-6 col-xs-12">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <a href="{{ photo.image.url }}" title="{{ photo.title }}" data-gallery="">
+                  <img src="{{ photo.image.url }}" class="img-responsive dynamic-heights">
+                </a>
+              </div>
+              <div class="panel-footer">
+                <h4>{{ photo.title }}</h4>
+                <div class="row">
+                  <div class="col-xs-12 col-md-9">
+                    <p>{{ photo.camera }}, {{ photo.focal_length}} / <em>f</em>/{{ photo.f_stop }} / {{photo.shutter}} / ISO {{ photo.iso }}</p>
+                  </div>
+                  <div class="col-xs-12 col-md-3">
+                    {% if photo.id|is_not_liked:liked %}
+                      <button type="button" class="btn btn-danger pull-right like-photo" data-photoid="{{photo.id}}">
+                         <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span><span class="like-number">{{ photo.likes }}</span>
+                      </button>
+                    {% else %}
+                      <button type="button" class="btn btn-danger pull-right like-photo" data-photoid="{{photo.id}}" disabled="disabled">
+                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span><span class="like-number">{{ photo.likes }}</span>
+                      </button>
+                    {% endif %}                      
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <p class="text-center">
+      <a href="https://500px.com/yuantianphotography" target="_blank">View my portfolio at
+        <img src="/media/photography/photos/500px.png">
+      </a>
+    </p>
+  </div>
+
+<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Next
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
