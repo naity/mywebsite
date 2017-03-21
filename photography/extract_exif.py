@@ -2,11 +2,15 @@
 
 from datetime import datetime
 import exifread
+import requests
+from io import BytesIO
 
-
-def extract(image_path):
-    with open(image_path, "rb") as f:
-        tags = exifread.process_file(f)
+def extract(image_url):
+    # image files are stored in S3 during production, thus need to fetch
+    # image info from a url address intead of a file on disk
+    # use request to get the image then use BytesIO to create a binary stream
+    response = requests.get(image_url)
+    tags = exifread.process_file(BytesIO(response.content))
 
     exif = {}
 

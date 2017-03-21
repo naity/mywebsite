@@ -19,7 +19,8 @@ class PhotoAdmin(admin.ModelAdmin):
     # Automatically save the exif information of photos
     def save_model(self, request, obj, form, change):
         obj.save()
-        exif = extract(obj.image.path)
+        # change from path to url so as to get the image url
+        exif = extract(obj.image.url)
         # if exif informatino is available
         obj.camera = exif.get("camera")
         obj.lens = exif.get("lens")
