@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', )
 # DEBUG = True
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = ['floating-citadel-65305.herokuapp.com', "192.168.0.18",
+ALLOWED_HOSTS = ['ytian.me', '.herokuapp.com', "192.168.0.18",
                 "127.0.0.1"]
 
 
