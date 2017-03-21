@@ -23,7 +23,7 @@
         <li><a href="http://sleepy-reef-3314.herokuapp.com/" target="_blank">Best of Zhihu</a></li>
       </ul>
     </li>
-    <li><a href="/media/cv/pdf/Yuan_Tian_Resume.pdf" target="_blank">CV</a></li>
+    <li><a href="{% static 'home/pdf/Yuan_Tian_Resume.pdf' %}" target="_blank">CV</a></li>
   </ul>
 {% endblock %}
 
@@ -32,7 +32,7 @@
     <div class="page-header">
       <div class="row">
         <div class="col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3">
-          <img src="/media/home/images/selfie.jpg" class="img-responsive center-block img-circle" alt="Profile">
+          <img src="{% static 'home/images/selfie.jpg' %}" class="img-responsive center-block img-circle" alt="Profile">
         </div>
       </div>
 
@@ -41,15 +41,15 @@
       <div class="container marketing">
         <div class="row">
           <div class="col-md-2 col-md-offset-3 col-xs-4 icon">
-            <img class="img-rounded img-responsive center-block" src="/media/home/images/test_tube.png" alt="Test Tube">
+            <img class="img-rounded img-responsive center-block" src="{% static 'home/images/test_tube.png' %}" alt="Test Tube">
             <p><a class="btn btn-default" href="{% url 'research:index' %}" role="button">Scientist</a></p>
           </div>
           <div class="col-md-2 col-xs-4 icon">
-            <img class="img-rounded img-responsive center-block" src="/media/home/images/camera.png" alt="Camera">
+            <img class="img-rounded img-responsive center-block" src="{% static 'home/images/camera.png' %}" alt="Camera">
             <p><a class="btn btn-default" href="{% url 'photography:index' %}" role="button">Shutterbug</a></p>
           </div>
           <div class="col-md-2 col-xs-4 icon">
-            <img class="img-rounded img-responsive center-block" src="/media/home/images/programming.png" alt="Coding">
+            <img class="img-rounded img-responsive center-block" src="{% static 'home/images/programming.png' %}" alt="Coding">
             <p><a class="btn btn-default" href="https://github.com/naity" role="button">Coder</a></p>
           </div>
         </div><!-- /.row -->
