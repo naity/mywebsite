@@ -11,7 +11,6 @@
   <script src="{% static 'photography/Bootstrap-Image-Gallery-3.4.2/js/bootstrap-image-gallery.js' %}"></script>
   <script src="{% static 'photography/Bootstrap-Image-Gallery-3.4.2/js/demo.js' %}"></script>
   <script src="{% static 'photography/js/like_photo_ajax.js' %}"></script>
-  <script src="{% static 'photography/js/image_heights.js' %}"></script>
 {% endblock %}
 
 {% block title %}Photography{% endblock %}
@@ -121,4 +120,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block footer_block %}
+  <script src="{% static 'photography/js/image_heights.js' %}"></script>
 {% endblock %}

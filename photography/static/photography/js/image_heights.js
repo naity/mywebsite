@@ -1,9 +1,10 @@
-$( document ).ready(function() {
-    var heights = $(".dynamic-heights").map(function() {
+// use $(window).on("load", function(){} to make sure all images are loaded first
+$(window).on("load", function(){
+	var heights = $(".dynamic-heights").map(function() {
         return $(this).height();
-    }).get(),
+    }).get();
 
-    minHeight = Math.min.apply(null, heights);
+    minHeight = Math.min.apply(100, heights);
 
     $(".dynamic-heights").height(minHeight);
 });
