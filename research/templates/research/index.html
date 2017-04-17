@@ -13,6 +13,7 @@
 {% block nav_block %}
   <ul class="nav navbar-nav">
     <li><a href="{% url 'home:index' %}">Home</a></li>
+    <li><a href="{% url 'blog:index' %}">Blog</a></li>
     <li class="active"><a href="{% url 'research:index' %}">Research</a></li>
     <li><a href="{% url 'photography:index' %}">Photography</a></li>
     <li class="dropdown">
@@ -77,5 +78,24 @@
         </div>
       </div>
     {% endfor %}
+
+    <nav class="text-center">
+      <ul class="pagination justify-content-center">
+          {% if publications.has_previous %}
+              <li class="page-item">
+                <a class="page-link" tabindex="-1" href="?page={{ publications.previous_page_number }}">Previous</a>
+              </li>
+          {% endif %}
+          <li class="page-item active">
+            <a class="page-link" href="#" tabindex="-1">{{ publications.number }} / {{ publications.paginator.num_pages }}</a>
+          </li>
+          {% if publications.has_next %}
+              <li lass="page-item">
+                <a class="page-link" tabindex="-1" href="?page={{ publications.next_page_number }}">Next</a>
+              </li>
+          {% endif %}
+      </ul>
+    </nav>
+
   </div>
 {% endblock %}

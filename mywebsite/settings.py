@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'research',
     'photography',
     'storages',
+    'blog',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'zinnia.context_processors.version',
             ],
         },
     },
@@ -152,3 +156,6 @@ AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
 MEDIA_URL = 'http://%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+
+CKEDITOR_UPLOAD_PATH = "blog_images/"
+CKEDITOR_IMAGE_BACKEND = "pillow"

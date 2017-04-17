@@ -1,0 +1,23 @@
+.publication: {
+    display: table;
+}
+
+.publication-col {
+    float: none;
+    display: table-cell;
+}
+
+.publication-fig {
+    vertical-align: middle;
+}
+
+p{
+    text-indent: 2em;
+}
+
+.abstract {
+    line-height: 1.4em;
+    height: 4.2em;
+    overflow: hidden;
+    margin-bottom: 0;
+}
