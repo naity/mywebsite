@@ -14,8 +14,8 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         article_list = Article.objects.order_by('-pub_date_time', '-pk')
 
-        # use Django's Paginator to display 3 articles
-        paginator = Paginator(article_list, 3)
+        # use Django's Paginator to display 5 article abstracts
+        paginator = Paginator(article_list, 5)
 
         # last page
         self.last_page = paginator.num_pages
@@ -36,3 +36,9 @@ class IndexView(generic.ListView):
         context["last_page"] = self.last_page
 
         return context
+
+
+class ArticleView(generic.DetailView):
+    model = Article
+    template_name = "blog/article.html"
+    context_object_name = "article"
