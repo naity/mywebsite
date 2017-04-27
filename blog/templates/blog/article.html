@@ -28,12 +28,16 @@
 
 {% block body_block %}
   <div class="container">
-    <div class="page-header">
-      <h3>{{ article.title }}</h3>
-      <h5>{{ article.pub_date_time}} by Yuan</h5>
-    </div>
-    <div>
-      {{ article.text|safe }}
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 col-xs-12">
+        <div class="page-header">
+          <h3>{{ article.title }}</h3>
+          <h5>{{ article.pub_date_time}} by Yuan</h5>
+        </div>
+        <div>
+          {{ article.text|safe }}
+        </div>
+      </div>
     </div>
 
     <nav class="text-center">
